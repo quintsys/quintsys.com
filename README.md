@@ -1,2 +1,9 @@
 # quintsys.com
-Public website &amp; blog for QSYS, INC.
+Public Website and Blog for QSYS, INC.
+
+## Deployment
+
+```bash
+bundle exec jekyll build JEKYLL_ENV=production
+firebase deploy
+````
