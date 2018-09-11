@@ -6,8 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-    - image: circleci/ruby:2.5.1-node-browsers
-
+    - image: circleci/ruby:2.5.1-node
     working_directory: ~/repo
     environment:
       JEKYLL_ENV: production
@@ -15,44 +14,51 @@ jobs:
       JOB_RESULTS_PATH: run-results
 
     steps:
+    # Git checkout
     - checkout
 
-#    - run:
-#        name: "Test Markdown Files"
-#        command: |
-#          wget https://github.com/felicianotech/md-proofer/releases/download/v0.1.0/md-proofer-v0.1.0-linux-amd64.tar.gz
-#          tar xfz md-proofer-v*.tar.gz
-#          sudo chmod +x ./md-proofer
-#          echo "Test Markdown files"
-#          echo "===================================================================================="
-#          ./md-proofer lint .
-
+    # Ruby Gems
     - restore_cache:
         keys:
-        - v4-quintsys-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-        - v4-quintsys-
-
+        - v1-gems-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        - v1-gems-{{ .Branch }}
+        - v1-gems
     - run:
-        name: "Install Ruby dependencies"
-        command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
-
+        command: |
+          bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
+          bundle clean
     - save_cache:
         paths:
         - vendor/bundle
-        key: v4-quintsys-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        key: v1-gems-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 
+     # javascript packages
+    - restore_cache:
+        keys:
+        - v1-yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+        - v1-yarn-packages-{{ .Branch }}
+        - v1-yarn-packages
+    - run: yarn
+    - save_cache:
+        paths:
+        - ~/.cache/yarn
+        key: v1-yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+
+    # Build it
     - run:
         name: "Build Jekyll"
-        command: bundle exec jekyll build --verbose
+        command: bundle exec jekyll build | tee $JOB_RESULTS_PATH/build-results.txt
 
+    # Tests
     - run:
         name: "Test Html"
-        command: bundle exec htmlproofer ./_site --check-html --disable-external
+        command: bundle exec htmlproofer jekyll/_site --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
 
-    - run:
-        name: "Install Firebase Tools"
-        command: npm install --save-dev firebase-tools
+    - store_artifacts:
+        path: run-results/
+        destination: run-results
 
+    # Deploy
     - run:
         name: "Deploy Master to Firebase"
         command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
