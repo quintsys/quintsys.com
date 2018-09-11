@@ -41,6 +41,7 @@ jobs:
           name: "Build the Jekyll site"
           command: |
             cd ~/quintsys-web/jekyll
+            ls $JOB_RESULTS_PATH
             bundle exec jekyll build 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
 
       - run:
