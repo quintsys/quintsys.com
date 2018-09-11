@@ -21,8 +21,8 @@ jobs:
     # Download and cache dependencies
     - restore_cache:
         keys:
-        - v3-quintsys-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-        - v3-quintsys-
+        - v4-quintsys-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        - v4-quintsys-
 
     - run:
         name: "Install Ruby dependencies"
@@ -31,7 +31,7 @@ jobs:
     - save_cache:
         paths:
         - vendor/bundle
-        key: v3-quintsys-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        key: v4-quintsys-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 
     - run:
         name: "Build Jekyll"
@@ -41,24 +41,10 @@ jobs:
         name: "Test Html"
         command: bundle exec htmlproofer ./_site --check-html --disable-external
 
-  deploy:
-    docker:
-    - image: circleci/ruby:2.5.1-node-browsers
-    working_directory: ~/repo
-    steps:
     - run:
-        name: Deploy Master to Firebase
+        name: "Install Firebase Tools"
+        command: npm install --save-dev firebase-tools
+
+    - run:
+        name: "Deploy Master to Firebase"
         command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
-
-workflows:
-  version: 2
-
-  -deploy:
-    jobs:
-    - build
-    - deploy:
-        requires:
-        - build
-        filters:
-          branches:
-            only: master
