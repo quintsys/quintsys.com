@@ -53,7 +53,7 @@ jobs:
           destination: quintsys-web
 
       - store_artifacts:
-          path: run-results/
+          path: $JOB_RESULTS_PATH/
           destination: run-results
 
       - persist_to_workspace:
