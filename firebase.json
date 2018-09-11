@@ -4,10 +4,7 @@
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**",
-      "Gemfile",
-      "Gemfile.lock",
-      "README.md"
+      "**/node_modules/**"
     ]
   }
 }
