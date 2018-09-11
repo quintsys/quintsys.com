@@ -9,11 +9,6 @@ jobs:
     # specify the version you desire here
     - image: circleci/ruby:2.5.1-node-browsers
 
-    # Specify service dependencies here if necessary
-    # CircleCI maintains a library of pre-built images
-    # documented at https://circleci.com/docs/2.0/circleci-images/
-    # - image: circleci/postgres:9.4
-
     working_directory: ~/repo
 
     steps:
@@ -22,27 +17,28 @@ jobs:
     # Download and cache dependencies
     - restore_cache:
         keys:
-        - v1-dependencies-{{ checksum "Gemfile.lock" }}
+        - v2-dependencies-{{ checksum "Gemfile.lock" }}
         # fallback to using the latest cache if no exact match is found
-        - v1-dependencies-
+        - v2-dependencies-
 
     - run:
-        name: install dependencies
-        command: |
-          bundle install --jobs=4 --retry=3 --path vendor/bundle
+        name: Ruby dependencies
+        command: bundle install --jobs=4 --retry=3
+
+    - run:
+        name: Node dependencies
+        command: npm install -g firebase-tools --unsafe-perm
 
     - save_cache:
         paths:
-        - ./vendor/bundle
-        key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+        - /usr/local/bundle
+        - /usr/local/lib/node_modules
+        key: v2-dependencies-{{ checksum "Gemfile.lock" }}
 
-    # run tests!
     - run:
-        name: run tests
-        command: |
-          bundle exec jekyll build
+        name: Build
+        command: bundle exec jekyll build --verbose
 
     - test:
         name:
-        command: |
-          bundle exec htmlproofer ./_site --check-html --disable-external
+        command: bundle exec htmlproofer ./_site --check-html --disable-external
