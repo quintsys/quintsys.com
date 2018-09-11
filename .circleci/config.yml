@@ -19,18 +19,18 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v2-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
-            - v2-gems-{{ .Branch }}
-            - v2-gems
+            - v3-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
+            - v3-gems-{{ .Branch }}
+            - v3-gems
       - run:
           name: "Bundle Install"
           command: |
             cd $JEKYLL_PATH
             bundle check || bundle install
       - save_cache:
-          key: v2-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
+          key: v3-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
           paths:
-            - $BUNDLE_PATH
+            - "vendor/bundle"
       - run:
           name: "Build the Jekyll site"
           command: |
