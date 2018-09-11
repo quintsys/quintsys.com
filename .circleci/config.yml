@@ -44,6 +44,10 @@ jobs:
         - ~/.cache/yarn
         key: v1-yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
 
+    - run:
+        name: Create results directory
+        command: mkdir -p $JOB_RESULTS_PATH
+
     # Build it
     - run:
         name: "Build Jekyll"
