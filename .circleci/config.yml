@@ -17,37 +17,38 @@ jobs:
     working_directory: ~/quintsys-web
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v2-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
-            - v2-gems-{{ .Branch }}
-            - v2-gems
-      - run:
-          name: "Bundle Install"
-          command: |
-            cd $JEKYLL_PATH
-            bundle check || bundle install
-      - save_cache:
-          key: v2-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
-          paths:
-            - $BUNDLE_PATH
-      - run:
-          name: "Build the Jekyll site"
-          command: |
-            cd $JEKYLL_PATH
-            bundle exec jekyll build
-      - run:
-          name: "Test with HTMLproofer"
-          command: |
-            cd $JEKYLL_PATH
-            bundle exec htmlproofer _site --check-favicon --check-html --disable-external --empty-alt-ignore
-      - store_artifacts:
-          path: $JEKYLL_PATH/_site
-          destination: quintsys-web
-      - persist_to_workspace:
-          root: $JEKYLL_PATH
-          paths:
-            - _site
+      - run ls
+#      - restore_cache:
+#          keys:
+#            - v2-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
+#            - v2-gems-{{ .Branch }}
+#            - v2-gems
+#      - run:
+#          name: "Bundle Install"
+#          command: |
+#            cd $JEKYLL_PATH
+#            bundle check || bundle install
+#      - save_cache:
+#          key: v2-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
+#          paths:
+#            - $BUNDLE_PATH
+#      - run:
+#          name: "Build the Jekyll site"
+#          command: |
+#            cd $JEKYLL_PATH
+#            bundle exec jekyll build
+#      - run:
+#          name: "Test with HTMLproofer"
+#          command: |
+#            cd $JEKYLL_PATH
+#            bundle exec htmlproofer _site --check-favicon --check-html --disable-external --empty-alt-ignore
+#      - store_artifacts:
+#          path: $JEKYLL_PATH/_site
+#          destination: quintsys-web
+#      - persist_to_workspace:
+#          root: $JEKYLL_PATH
+#          paths:
+#            - _site
   deploy:
     docker:
       - image: circleci/node:10.10
@@ -65,10 +66,10 @@ workflows:
   build_and_deploy:
     jobs:
       - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - master
+#      - deploy:
+#          requires:
+#            - build
+#          filters:
+#            branches:
+#              only:
+#                - master
