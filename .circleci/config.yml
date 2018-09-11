@@ -56,7 +56,7 @@ jobs:
     # Tests
     - run:
         name: "Test Html"
-        command: bundle exec htmlproofer jekyll/_site --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
+        command: bundle exec htmlproofer _site --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
 
     - store_artifacts:
         path: run-results/
