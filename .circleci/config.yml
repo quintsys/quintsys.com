@@ -19,15 +19,16 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v2-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
+            - v2-gems-{{ .Branch }}-{{ checksum "~/quintsys-web/jekyll/Gemfile.lock" }}
             - v2-gems-{{ .Branch }}
             - v2-gems
       - run:
           name: "Bundle Install"
           command: |
-            bundle check --gemfile=jekyll/Gemfile || bundle install --gemfile=jekyll/Gemfile --jobs 4 --retry 3
+            cd ~/quintsys-web/jekyll
+            bundle check || bundle install
       - save_cache:
-          key: v2-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
+          key: v2-gems-{{ .Branch }}-{{ checksum "~/quintsys-web/jekyll/Gemfile.lock" }}
           paths:
             - "vendor/bundle"
 
@@ -38,11 +39,13 @@ jobs:
 
       - run:
           name: "Build the Jekyll site"
-          command: cd jekyll && bundle exec jekyll build --config jekyll/_config.yml --source jekyll --destination jekyll/_site/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
+          command: |
+            cd ~/quintsys-web/jekyll
+            bundle exec jekyll build 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
 
       - run:
           name: "Test with HTMLproofer"
-          command: bundle exec htmlproofer jekyll/_site --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
+          command: bundle exec htmlproofer ~/quintsys-web/jekyll/_site --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
 
 
       - store_artifacts:
