@@ -37,3 +37,5 @@ exclude:
   - package.json
   - package-lock.json
   - firebase.json
+  - [vendor]
+  - ruby
