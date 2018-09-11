@@ -9,7 +9,7 @@ jobs:
       - image: circleci/ruby:2.5.1-node
     environment:
       JEKYLL_ENV: production
-      BUNDLE_PATH: vendor/bundle
+      BUNDLE_PATH: jekyll/vendor/bundle
       BUNDLE_JOBS: 4
       BUNDLE_RETRY: 3
       NOKOGIRI_USE_SYSTEM_LIBRARIES: true
@@ -19,17 +19,17 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
-            - v1-gems-{{ .Branch }}
-            - v1-gems
+            - v2-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
+            - v2-gems-{{ .Branch }}
+            - v2-gems
       - run:
           name: "Bundle Install"
           command: |
             bundle check --gemfile=jekyll/Gemfile || bundle install --gemfile=jekyll/Gemfile --jobs 4 --retry 3
       - save_cache:
-          key: v1-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
+          key: v2-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
           paths:
-            - "vendor/bundle"
+            - "jekyll/vendor/bundle"
 
 
       - run:
