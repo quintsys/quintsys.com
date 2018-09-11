@@ -26,7 +26,6 @@ jobs:
         name: "Install ruby gems"
         command: |
           bundle check --gemfile=jekyll/Gemfile --path=vendor/bundle || bundle install --gemfile=jekyll/Gemfile --path=vendor/bundle --jobs 4 --retry 3
-          bundle clean
     - save_cache:
         paths:
         - "vendor/bundle"
