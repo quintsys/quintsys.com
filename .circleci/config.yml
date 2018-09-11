@@ -13,7 +13,7 @@ jobs:
       BUNDLE_JOBS: 4
       BUNDLE_RETRY: 3
       NOKOGIRI_USE_SYSTEM_LIBRARIES: true
-      JOB_RESULTS_PATH: run-results
+      JOB_RESULTS_PATH: ~/quintsys-web/run-results
     working_directory: ~/quintsys-web
     steps:
       - checkout
