@@ -42,10 +42,10 @@ jobs:
             cd $JEKYLL_PATH
             bundle exec htmlproofer _site --check-favicon --check-html --disable-external --empty-alt-ignore
       - store_artifacts:
-          path: $JEKYLL_PATH/_site
+          path: ~/quintsys-web/jekyll/_site
           destination: quintsys-web
       - persist_to_workspace:
-          root: $JEKYLL_PATH
+          root: ~/quintsys-web/jekyll
           paths:
             - _site
   deploy:
