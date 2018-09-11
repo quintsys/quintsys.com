@@ -18,7 +18,7 @@ email: contact@quintsys.com
 description: "Web &amp; Database applications development."
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://quintsys.com" # the base hostname & protocol for your site, e.g. http://example.com
-permalink: /:categories/:year/:month/:day/:title
+permalink: pretty
 
 twitter_username: qbantek
 github_username:  quintsys
