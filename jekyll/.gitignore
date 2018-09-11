@@ -5,5 +5,4 @@ node_modules/*
 .sass-cache/
 _site/
 jekyll/.jekyll-cache/
-jekyll/environments/
 .idea/**
