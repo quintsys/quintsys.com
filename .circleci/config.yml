@@ -9,7 +9,7 @@ jobs:
       - image: circleci/ruby:2.5.1-node
     environment:
       JEKYLL_ENV: production
-      BUNDLE_PATH: jekyll/vendor/bundle
+      BUNDLE_PATH: vendor/bundle
       BUNDLE_JOBS: 4
       BUNDLE_RETRY: 3
       NOKOGIRI_USE_SYSTEM_LIBRARIES: true
@@ -29,7 +29,7 @@ jobs:
       - save_cache:
           key: v2-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
           paths:
-            - "jekyll/vendor/bundle"
+            - "vendor/bundle"
 
 
       - run:
@@ -38,7 +38,7 @@ jobs:
 
       - run:
           name: "Build the Jekyll site"
-          command: bundle exec jekyll build --config jekyll/_config.yml --source jekyll --destination jekyll/_site/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
+          command: cd jekyll && bundle exec jekyll build --config jekyll/_config.yml --source jekyll --destination jekyll/_site/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
 
       - run:
           name: "Test with HTMLproofer"
