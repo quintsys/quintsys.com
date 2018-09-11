@@ -47,7 +47,7 @@ jobs:
     # Build it
     - run:
         name: "Build Jekyll"
-        command: bundle exec jekyll build | tee $JOB_RESULTS_PATH/build-results.txt
+        command: bundle exec jekyll build 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
 
     # Tests
     - run:
