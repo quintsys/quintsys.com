@@ -31,7 +31,7 @@ jobs:
     - save_cache:
         paths:
         - vendor/bundle
-        key: v2-dependencies-{{ checksum "Gemfile.lock" }}
+        key: v3-quintsys-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 
     - run:
         name: "Build Jekyll"
