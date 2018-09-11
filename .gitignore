@@ -3,3 +3,9 @@ _site/
 .jekyll-cache/
 .jekyll-metadata
 .idea/
+
+# Ignore bundler config.
+/.bundle
+
+# npm modules
+/node_modules/*
