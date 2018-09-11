@@ -13,41 +13,39 @@ jobs:
       BUNDLE_JOBS: 4
       BUNDLE_RETRY: 3
       NOKOGIRI_USE_SYSTEM_LIBRARIES: true
-      JOB_RESULTS_PATH: ~/quintsys-web/run-results
+      JEKYLL_PATH: ~/quintsys-web/jekyll
     working_directory: ~/quintsys-web
     steps:
       - checkout
       - restore_cache:
           keys:
-            - v2-gems-{{ .Branch }}-{{ checksum "~/quintsys-web/jekyll/Gemfile.lock" }}
+            - v2-gems-{{ .Branch }}-{{ checksum "$JEKYLL_PATH/Gemfile.lock" }}
             - v2-gems-{{ .Branch }}
             - v2-gems
       - run:
           name: "Bundle Install"
           command: |
-            cd ~/quintsys-web/jekyll
+            cd $JEKYLL_PATH
             bundle check || bundle install
       - save_cache:
-          key: v2-gems-{{ .Branch }}-{{ checksum "~/quintsys-web/jekyll/Gemfile.lock" }}
+          key: v2-gems-{{ .Branch }}-{{ checksum "$JEKYLL_PATH/Gemfile.lock" }}
           paths:
-            - "vendor/bundle"
-
+            - $BUNDLE_PATH
       - run:
           name: "Build the Jekyll site"
           command: |
-            cd ~/quintsys-web/jekyll
+            cd $JEKYLL_PATH
             bundle exec jekyll build
-
       - run:
           name: "Test with HTMLproofer"
-          command: bundle exec htmlproofer ~/quintsys-web/jekyll/_site --check-favicon --check-html --disable-external --empty-alt-ignore
-
+          command: |
+            cd $JEKYLL_PATH
+            bundle exec htmlproofer _site --check-favicon --check-html --disable-external --empty-alt-ignore
       - store_artifacts:
-          path: jekyll/_site/
+          path: $JEKYLL_PATH/_site
           destination: quintsys-web
-
       - persist_to_workspace:
-          root: ~/quintsys-web/jekyll
+          root: $JEKYLL_PATH
           paths:
             - _site
   deploy:
