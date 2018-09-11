@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "_site",
+    "public": "jekyll/_site",
     "ignore": [
       "firebase.json",
       "**/.*",

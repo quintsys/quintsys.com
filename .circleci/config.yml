@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
     - image: circleci/ruby:2.5.1-node
-    working_directory: ~/repo
+    working_directory: ~/quintsys-web
     environment:
       JEKYLL_ENV: production
       NOKOGIRI_USE_SYSTEM_LIBRARIES: true
@@ -19,18 +19,18 @@ jobs:
     # Ruby Gems
     - restore_cache:
         keys:
-        - v1-gems-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        - v1-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
         - v1-gems-{{ .Branch }}
         - v1-gems
     - run:
         name: "Install ruby gems"
         command: |
-          bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
+          bundle check --gemfile=jekyll/Gemfile --path=vendor/bundle || bundle install --gemfile=jekyll/Gemfile --path=vendor/bundle --jobs 4 --retry 3
           bundle clean
     - save_cache:
         paths:
-        - vendor/bundle
-        key: v1-gems-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        - "vendor/bundle"
+        key: v1-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
 
     - run:
         name: "Create results directory"
@@ -39,31 +39,30 @@ jobs:
     # Build it
     - run:
         name: "Build Jekyll"
-        command: bundle exec jekyll build 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
+        command: bundle exec jekyll build --config jekyll/_config.yml --source jekyll --destination jekyll/_site/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
 
     # Tests
     - run:
         name: "Test Html"
-        command: bundle exec htmlproofer _site --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
+        command: bundle exec htmlproofer jekyll/_site --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
 
     - store_artifacts:
-        path: _site/
-        destination: _site
+        path: jekyll/_site/
+        destination: web
 
     - store_artifacts:
         path: run-results/
         destination: run-results
 
     - persist_to_workspace:
-        root: ~/repo/_site
+        root: ~/quintsys-web/jekyll/_site
         paths:
         - _site
   deploy:
     docker:
     - image: circleci/node:10.10
     steps:
-    - attach_workspace:
-        at: ./
+    - attach_workspace
     - run:
         name: "Install firebase-tools"
         command: yarn add firebase-tools --dev
