@@ -6,13 +6,12 @@ version: 2
 jobs:
   build:
     docker:
-    - image: circleci/ruby:2.5.1-node
+    - image: circleci/node:2.5.1-node
     working_directory: ~/repo
     environment:
       JEKYLL_ENV: production
       NOKOGIRI_USE_SYSTEM_LIBRARIES: true
       JOB_RESULTS_PATH: run-results
-
     steps:
     # Git checkout
     - checkout
@@ -24,6 +23,7 @@ jobs:
         - v1-gems-{{ .Branch }}
         - v1-gems
     - run:
+        name: "Install ruby gems"
         command: |
           bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
           bundle clean
@@ -32,20 +32,20 @@ jobs:
         - vendor/bundle
         key: v1-gems-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 
-     # javascript packages
-    - restore_cache:
-        keys:
-        - v1-yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
-        - v1-yarn-packages-{{ .Branch }}
-        - v1-yarn-packages
-    - run: yarn
-    - save_cache:
-        paths:
-        - ~/.cache/yarn
-        key: v1-yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+    # javascript packages
+#    - restore_cache:
+#        keys:
+#        - v1-yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+#        - v1-yarn-packages-{{ .Branch }}
+#        - v1-yarn-packages
+#    - run: yarn
+#    - save_cache:
+#        paths:
+#        - ~/.cache/yarn
+#        key: v1-yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
 
     - run:
-        name: Create results directory
+        name: "Create results directory"
         command: mkdir -p $JOB_RESULTS_PATH
 
     # Build it
@@ -59,10 +59,38 @@ jobs:
         command: bundle exec htmlproofer _site --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
 
     - store_artifacts:
+        path: _site/
+        destination: _site
+
+    - store_artifacts:
         path: run-results/
         destination: run-results
 
-    # Deploy
+    - persist_to_workspace:
+        root: ~/repo/_site
+        paths:
+        - _site
+  deploy:
+    docker:
+    - image: circleci/node:10.10
+    steps:
+    - attach_workspace:
+        at: ./
     - run:
-        name: "Deploy Master to Firebase"
+        name: "Install firebase-tools"
+        command: yarn add firebase-tools --dev
+    - run:
+        name: "Deploy to Firebase if tests pass and branch is Master"
         command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+    - build:
+    - deploy:
+        filters:
+          branches:
+            only:
+            - master
+        requires:
+          - build
