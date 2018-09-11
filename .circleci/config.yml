@@ -21,8 +21,8 @@ jobs:
     # Download and cache dependencies
     - restore_cache:
         keys:
-        - v2-quintsys-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-        - v2-quintsys-
+        - v3-quintsys-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        - v3-quintsys-
 
     - run:
         name: "Install Ruby dependencies"
