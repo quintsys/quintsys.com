@@ -19,7 +19,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v2-gems-{{ .Branch }}-{{ checksum "$JEKYLL_PATH/Gemfile.lock" }}
+            - v2-gems-{{ .Branch }}-{{ checksum "~/quintsys-web/jekyll/Gemfile.lock" }}
             - v2-gems-{{ .Branch }}
             - v2-gems
       - run:
@@ -28,7 +28,7 @@ jobs:
             cd $JEKYLL_PATH
             bundle check || bundle install
       - save_cache:
-          key: v2-gems-{{ .Branch }}-{{ checksum "$JEKYLL_PATH/Gemfile.lock" }}
+          key: v2-gems-{{ .Branch }}-{{ checksum "~/quintsys-web/jekyll/Gemfile.lock" }}
           paths:
             - $BUNDLE_PATH
       - run:
