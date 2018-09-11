@@ -32,18 +32,6 @@ jobs:
         - vendor/bundle
         key: v1-gems-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 
-    # javascript packages
-#    - restore_cache:
-#        keys:
-#        - v1-yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
-#        - v1-yarn-packages-{{ .Branch }}
-#        - v1-yarn-packages
-#    - run: yarn
-#    - save_cache:
-#        paths:
-#        - ~/.cache/yarn
-#        key: v1-yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
-
     - run:
         name: "Create results directory"
         command: mkdir -p $JOB_RESULTS_PATH
