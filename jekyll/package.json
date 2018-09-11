@@ -1,4 +1,9 @@
 {
+  "name": "quintsys.com",
+  "version": "1.0.0",
+  "description": "Public website for QSYS, INC.",
+  "main": "index.html",
+  "license": "UNLICENSED",
   "devDependencies": {
     "firebase-tools": "^4.2.1"
   }
