@@ -9,10 +9,11 @@ jobs:
       - image: circleci/ruby:2.5.1-node
     environment:
       JEKYLL_ENV: production
+      JEKYLL_PATH: jekyll
       BUNDLE_JOBS: 4
       BUNDLE_RETRY: 3
+      BUNDLE_PATH: vendor/bundle
       NOKOGIRI_USE_SYSTEM_LIBRARIES: true
-      JEKYLL_PATH: jekyll
     working_directory: ~/quintsys-web
     steps:
       - checkout
@@ -25,7 +26,7 @@ jobs:
           name: "Bundle Install"
           command: |
             cd $JEKYLL_PATH
-            bundle check --path vendor/bundle || bundle install --path vendor/bundle
+            bundle check || bundle install
       - save_cache:
           key: v4-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
           paths:
