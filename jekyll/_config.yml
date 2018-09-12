@@ -36,7 +36,7 @@ plugins:
 exclude:
   - Gemfile
   - Gemfile.lock
-  - node_modules
+#  - node_modules
   - vendor/bundle/
   - vendor/cache/
   - vendor/gems/
@@ -46,6 +46,7 @@ exclude:
   - package.json
   - package-lock.json
   - yarn.lock
+  - .idea/
 
 sass:
   style: compressed
@@ -70,3 +71,5 @@ assets:
   # Sets cachebusting policy for generated assets.
   #
   cachebust: hard
+  sources:
+    - node_modules

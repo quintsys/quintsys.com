@@ -2,33 +2,21 @@
 layout: default
 ---
 
-<div class="home">
-  {%- if page.title -%}
-    <h1 class="page-heading">{{ page.title }}</h1>
-  {%- endif -%}
-
-  {{ content }}
-
-  {%- if site.posts.size > 0 -%}
-    <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
-    <ul class="post-list">
-      {%- for post in site.posts -%}
-      <li>
-        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
-          </a>
-        </h3>
-        {%- if site.show_excerpts -%}
-          {{ post.excerpt }}
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <div class="col-12 p-0 h-100">
+      <div class="jumbotron h-100 text-center m-0 bg-info d-flex flex-column justify-content-center">
+      <div class="mx-auto col-sm-6 col-md-5 col-lg-4">
+          {% asset logo_light.svg %}
+      </div>
+        <h1 class="display-4 text-white">QSYS, INC.</h1>
+        <p class="lead text-white">Web and database applications development.</p>
+        {%- if site.email -%}
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" href="mailto:{{ site.email }}" role="button">Contact Us</a>
+        </p>
         {%- endif -%}
-      </li>
-      {%- endfor -%}
-    </ul>
-
-    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
-  {%- endif -%}
-
+      </div>
+    </div>
+  </div>
 </div>

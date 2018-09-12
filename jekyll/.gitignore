@@ -4,5 +4,5 @@ node_modules/*
 .jekyll-metadata
 .sass-cache/
 _site/
-jekyll/.jekyll-cache/
-.idea/**
+.jekyll-cache/
+.idea/
