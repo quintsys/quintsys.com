@@ -45,9 +45,9 @@ jobs:
           path: ~/quintsys-web/jekyll/_site
           destination: quintsys-web
       - persist_to_workspace:
-          root: ~/quintsys-web/jekyll
+          root: ~/quintsys-web
           paths:
-            - _site
+            - jekyll/_site
             - .firebaserc
             - firebase.json
   deploy:
