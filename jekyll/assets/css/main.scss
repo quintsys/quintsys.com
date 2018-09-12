@@ -1,7 +1,9 @@
 ---
 
 ---
-@import "_custom";
+body,html {
+  height: 100%;
+}
 
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";

@@ -15,7 +15,7 @@
 # in the templates via {{ site.myvariable }}.
 title: QSYS, INC.
 email: contact@quintsys.com
-description: "Web &amp; Database applications development."
+description: "Web and Database applications development."
 url: "https://quintsys.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: qbantek
 github_username:  quintsys
@@ -36,7 +36,7 @@ plugins:
 exclude:
   - Gemfile
   - Gemfile.lock
-#  - node_modules
+  - node_modules
   - vendor/bundle/
   - vendor/cache/
   - vendor/gems/
