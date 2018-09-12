@@ -16,20 +16,19 @@
 title: QSYS, INC.
 email: contact@quintsys.com
 description: "Web &amp; Database applications development."
-baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://quintsys.com" # the base hostname & protocol for your site, e.g. http://example.com
-permalink: pretty
-
 twitter_username: qbantek
 github_username:  quintsys
 google_analytics: "UA-36207607-1"
 
 # Build settings
+permalink: pretty
 markdown: kramdown
-theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-assets
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
@@ -48,3 +47,26 @@ exclude:
   - package-lock.json
   - yarn.lock
 
+sass:
+  style: compressed
+  load_paths:
+    - _sass
+    - node_modules
+
+#
+# Plugin: jekyll-assets
+#
+assets:
+  # Sets JS compressor. No compression by default.
+  # Possible variants: 'yui', 'uglifier', nil
+  #
+  js_compressor: uglifier
+  #
+  # Sets CSS compressor. No compression by default.
+  # Possible variants: 'yui', 'sass', nil
+  #
+  css_compressor: sass
+  #
+  # Sets cachebusting policy for generated assets.
+  #
+  cachebust: hard

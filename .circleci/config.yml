@@ -16,6 +16,8 @@ jobs:
     working_directory: ~/quintsys-web
     steps:
       - checkout
+
+      # gems
       - restore_cache:
           keys:
             - v4-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
@@ -30,6 +32,24 @@ jobs:
           key: v4-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
           paths:
             - "jekyll/vendor/bundle"
+
+      # js packages
+      - restore_cache:
+          keys:
+          - v4-yarn-deps-{{ .Branch }}-{{ checksum "jekyll/yarn.lock" }}
+          - v4-yarn-deps-{{ .Branch }}
+          - v4-yarn-deps
+      - run:
+          name: "Yarn Install"
+          command: |
+            cd $JEKYLL_PATH
+            yarn
+      - save_cache:
+          key: v4-yarn-deps-{{ .Branch }}-{{ checksum "jekyll/yarn.lock" }}
+          paths:
+          - "jekyll/node_modules"
+
+
       - run:
           name: "Build the Jekyll site"
           command: |
