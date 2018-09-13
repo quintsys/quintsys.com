@@ -1,18 +1,3 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
 title: QSYS, INC.
 email: contact@quintsys.com
 description: "Web and Database applications development."
@@ -20,15 +5,12 @@ url: "https://quintsys.com" # the base hostname & protocol for your site, e.g. h
 twitter_username: qbantek
 github_username:  quintsys
 google_analytics: "UA-36207607-1"
-
-# Build settings
 permalink: pretty
-markdown: kramdown
+
 plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
-  - jekyll-sitemap
   - jekyll-assets
+  - jekyll-feed
+  - jekyll-sitemap
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
@@ -41,35 +23,14 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
-  - README.md
-  - firebase.json
   - package.json
-  - package-lock.json
   - yarn.lock
-  - .idea/
 
 sass:
-  style: compressed
   load_paths:
     - _sass
     - node_modules
 
-#
-# Plugin: jekyll-assets
-#
 assets:
-  # Sets JS compressor. No compression by default.
-  # Possible variants: 'yui', 'uglifier', nil
-  #
-  js_compressor: uglifier
-  #
-  # Sets CSS compressor. No compression by default.
-  # Possible variants: 'yui', 'sass', nil
-  #
-  css_compressor: sass
-  #
-  # Sets cachebusting policy for generated assets.
-  #
-  cachebust: hard
   sources:
     - node_modules
