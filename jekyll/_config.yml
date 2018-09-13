@@ -1,5 +1,15 @@
+title: QSYS, INC.
+email: contact@quintsys.com
+description: "Web and Database applications development."
+url: "https://quintsys.com" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: qbantek
+github_username:  quintsys
+google_analytics: "UA-36207607-1"
+
 plugins:
   - jekyll-assets
+  - jekyll-feed
+  - jekyll-sitemap
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

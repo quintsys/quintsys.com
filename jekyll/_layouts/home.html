@@ -1,0 +1,23 @@
+---
+layout: default
+---
+
+<div class="container-fluid h-100 bg-light">
+    <div class="row h-100">
+        <div class="col-12 p-0 h-100">
+            <div class="jumbotron h-100 text-center m-0 d-flex flex-column justify-content-center">
+                {% asset logo_light.svg class='img-fluid mx-auto' alt='QSYS,
+                INC.' style='max-width:600px' %}
+                <p class="lead text-dark pb-5">Web and database applications
+                    development.</p>
+                {%- if site.email -%}
+                <p class="lead">
+                    <a class="btn btn-outline-dark btn-lg"
+                       href="mailto:{{ site.email }}" role="button"><i
+                            class="fa fa-envelope"></i> Contact Us</a>
+                </p>
+                {%- endif -%}
+            </div>
+        </div>
+    </div>
+</div>
