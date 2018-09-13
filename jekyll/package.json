@@ -1,12 +1,8 @@
 {
-  "name": "quintsys.com",
+  "name": "jtest",
   "version": "1.0.0",
-  "description": "Public website for QSYS, INC.",
-  "main": "index.html",
-  "license": "UNLICENSED",
-  "devDependencies": {
-    "firebase-tools": "^4.2.1"
-  },
+  "main": "index.js",
+  "license": "MIT",
   "dependencies": {
     "bootstrap": "^4.1.3",
     "jquery": "^3.3.1",

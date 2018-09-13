@@ -1,15 +1,14 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-ruby '2.5.1'
 
-gem 'jekyll', '~> 3.8.3'
-gem 'sprockets', '~> 4.0.0.beta8'
-gem 'uglifier', '~> 4.1', '>= 4.1.19'
-gem 'html-proofer', '3.9.1'
-gem 'jekyll-sitemap', '~> 1.2'
+gem "jekyll", "~> 3.8.3"
+gem 'uglifier'
+gem 'sass'
 
+
+# If you have any plugins, put them here!
 group :jekyll_plugins do
-  gem 'jekyll-assets', '~> 3.0', '>= 3.0.11'
-  gem 'jekyll-feed', '~> 0.6'
-  gem 'jekyll-seo-tag', '~> 2.1'
+  gem "jekyll-assets"
 end
+
+
