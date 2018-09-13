@@ -1,8 +1,8 @@
 {
-  "name": "jtest",
+  "name": "quintsys.com",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "dependencies": {
     "bootstrap": "^4.1.3",
     "jquery": "^3.3.1",
