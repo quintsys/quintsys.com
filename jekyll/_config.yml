@@ -25,6 +25,7 @@ exclude:
   - vendor/ruby/
   - package.json
   - yarn.lock
+  - .idea/
 
 sass:
   load_paths:
