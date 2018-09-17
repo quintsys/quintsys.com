@@ -1,5 +1,15 @@
 var CACHE_NAME = 'qsys-cache-v1';
-var urlsToCache = ['/'];
+var urlsToCache = ['/',
+  'index.html',
+  '/android-chrome-192x192.png',
+  '/android-chrome-256x256.png',
+  '/apple-touch-icon.png',
+  '/browserconfig.xml',
+  '/favicon-16x16.png',
+  '/favicon-32x32.png',
+  '/favicon.ico',
+  '/mstile-150x150.png',
+  '/safari-pinned-tab.svg'];
 
 self.addEventListener('install', function (event) {
   event.waitUntil(
@@ -11,29 +21,30 @@ self.addEventListener('install', function (event) {
   );
 });
 
-self.addEventListener('fetch', function(event) {
+self.addEventListener('fetch', function (event) {
+  console.log('Service Worker Fetch...');
+
   event.respondWith(
     caches.match(event.request)
-      .then(function(response) {
-        // Cache hit - return response
+      .then(function (response) {
+
         if (response) {
+          console.log('Serve from cache', response);
           return response;
         }
 
         var fetchRequest = event.request.clone();
-        return fetch(fetchRequest).then(
-          function(response) {
-            if(!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-            var responseToCache = response.clone();
-            caches.open(CACHE_NAME)
-              .then(function(cache) {
-                cache.put(event.request, responseToCache);
-              });
+        return fetch(fetchRequest).then(function (response) {
+          if (!response || response.status !== 200 || response.type !== 'basic') {
             return response;
           }
-        );
+          var responseToCache = response.clone();
+          caches.open(CACHE_NAME)
+            .then(function (cache) {
+              cache.put(event.request, responseToCache);
+            });
+          return response;
+        });
       })
   );
 });
