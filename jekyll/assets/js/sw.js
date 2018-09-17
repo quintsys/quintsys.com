@@ -1,6 +1,6 @@
 var CACHE_NAME = 'qsys-cache-v1';
 var urlsToCache = ['/',
-  'index.html',
+  '/index.html',
   '/android-chrome-192x192.png',
   '/android-chrome-256x256.png',
   '/apple-touch-icon.png',
