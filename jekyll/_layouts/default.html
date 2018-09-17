@@ -5,7 +5,7 @@
 {{ content }}
 <script>
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('{% asset sw.js @path %}', {scope: '/'})
+    navigator.serviceWorker.register('/sw.js}', {scope: '/'})
       .then(function (registration) {
         console.log('Service Worker Registered');
       });
@@ -16,4 +16,3 @@
   }
 </script>
 </body>
-</html>
