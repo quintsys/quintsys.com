@@ -1,6 +1,5 @@
 var CACHE_NAME = 'qsys-cache-v1';
-var body = document.getElementsByTagName('body')[0];
-var urlsToCache = body.dataset.cached;
+var urlsToCache = ['/'];
 
 self.addEventListener('install', function (event) {
   event.waitUntil(
