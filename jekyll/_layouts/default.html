@@ -1,8 +1,19 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: 'en' }}">
 {%- include head.html -%}
-<body data-service-worker="{% asset sw.js @path %}">
+<body>
 {{ content }}
-{% asset main.js %}
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('{% asset sw.js @path %}', {scope: '/'})
+      .then(function (registration) {
+        console.log('Service Worker Registered');
+      });
+    navigator.serviceWorker.ready
+      .then(function (registration) {
+        console.log('Service Worker Ready');
+      });
+  }
+</script>
 </body>
 </html>
