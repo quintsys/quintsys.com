@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: 'en' }}">
 {%- include head.html -%}
-<body>
+<body data-service-worker="{% asset sw.js @path %}"
+      data-cached="['/',
+                    '{% asset main.css @path %}',
+                    '{% asset logo_light.svg @path %}']]">
 {{ content }}
+{% asset main.js %}
 </body>
 </html>
