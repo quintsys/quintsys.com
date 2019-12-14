@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.5.1-node
+      - image: circleci/ruby:2.6.5-node
     environment:
       JEKYLL_ENV: production
       JEKYLL_PATH: jekyll
@@ -23,6 +23,13 @@ jobs:
             - v4-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
             - v4-gems-{{ .Branch }}
             - v4-gems
+      - run:
+          name: 'Bundle Gem'
+          command: |
+            cd $JEKYLL_PATH
+            echo 'export BUNDLER_VERSION=2.0.2' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
       - run:
           name: "Bundle Install"
           command: |
@@ -48,7 +55,6 @@ jobs:
           key: v4-yarn-deps-{{ .Branch }}-{{ checksum "jekyll/yarn.lock" }}
           paths:
           - "jekyll/node_modules"
-
 
       - run:
           name: "Build the Jekyll site"

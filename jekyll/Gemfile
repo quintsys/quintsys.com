@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'html-proofer', '3.9.1'
 gem 'jekyll', '~> 3.8.3'
 gem 'jekyll-sitemap', '~> 1.2'
+gem "sprockets", "~> 3.7"
 gem 'uglifier', '~> 4.1', '>= 4.1.19'
 
 # If you have any plugins, put them here!
