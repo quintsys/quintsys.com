@@ -6,10 +6,11 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.5.1-node
+      - image: circleci/ruby:2.6.0-node
     environment:
       JEKYLL_ENV: production
       JEKYLL_PATH: jekyll
+      BUNDLER_VERSION: 2.0.2
       BUNDLE_JOBS: 4
       BUNDLE_RETRY: 3
       NOKOGIRI_USE_SYSTEM_LIBRARIES: true
