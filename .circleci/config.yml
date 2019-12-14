@@ -10,13 +10,18 @@ jobs:
     environment:
       JEKYLL_ENV: production
       JEKYLL_PATH: jekyll
-      BUNDLER_VERSION: 2.0.2
       BUNDLE_JOBS: 4
       BUNDLE_RETRY: 3
       NOKOGIRI_USE_SYSTEM_LIBRARIES: true
     working_directory: ~/quintsys-web
     steps:
       - checkout
+      - run:
+        name: 'Configure Bundler'
+        command: |
+          echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+          source $BASH_ENV
+          gem install bundler
 
       # gems
       - restore_cache:
