@@ -78,7 +78,7 @@ jobs:
             - firebase.json
   deploy:
     docker:
-      - image: circleci/node:10.10
+      - image: cimg/node:15.8.0
     steps:
       - attach_workspace:
           at: ./
