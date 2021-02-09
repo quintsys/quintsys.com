@@ -34,7 +34,8 @@ jobs:
           name: "Bundle Install"
           command: |
             cd $JEKYLL_PATH
-            bundle check --path vendor/bundle || bundle install --path vendor/bundle
+            bundle config set --local path 'vendor/bundle'
+            bundle check || bundle install
       - save_cache:
           key: v4-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
           paths:
