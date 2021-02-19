@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.2-node
+      - image: circleci/ruby:3.0.0-node
     environment:
       JEKYLL_ENV: production
       JEKYLL_PATH: jekyll
@@ -23,13 +23,6 @@ jobs:
             - v4-gems-{{ .Branch }}-{{ checksum "jekyll/Gemfile.lock" }}
             - v4-gems-{{ .Branch }}
             - v4-gems
-      - run:
-          name: 'Bundle Gem'
-          command: |
-            cd $JEKYLL_PATH
-            echo 'export BUNDLER_VERSION=2.0.2' >> $BASH_ENV
-            source $BASH_ENV
-            gem install bundler
       - run:
           name: "Bundle Install"
           command: |
