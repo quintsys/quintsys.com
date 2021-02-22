@@ -1,0 +1,19 @@
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="/">
+    {% asset logo_light.svg 
+    class='d-inline-block align-top img-fluid mx-auto' 
+    alt={{site.title}} 
+    style='width:5rem' %}
+  </a>
+  <ul class="nav justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link btn-outline-dark" href="/blog">Blog</a>
+    </li>
+    {%- if site.email -%}
+    <li class="nav-item">
+      <a class="nav-link btn-outline-dark" 
+         href="mailto:{{ site.email }}">Contact</a>
+    </li>
+    {%- endif -%}
+  </ul>
+</nav>
