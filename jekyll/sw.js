@@ -1,5 +1,5 @@
 const version = "0.0.1";
-const cacheName = `qsys-${version}`;
+const cacheName = `quintsys-${version}`;
 self.addEventListener('install', e => {
     const timeStamp = Date.now();
     e.waitUntil(caches.open(cacheName).then(cache => {

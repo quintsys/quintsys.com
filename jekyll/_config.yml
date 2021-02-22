@@ -1,7 +1,22 @@
-title: QSYS, INC.
-email: contact@quintsys.com
-description: "Custom software applications development. Technical solutions to your business problems."
+# seo
+title: QUINTSYS, CORP.
+tagline: "Custom Software Consultancy"
+description: "Custom software applications development. Technical solutions to business problems"
 url: "https://quintsys.com" # the base hostname & protocol for your site, e.g. http://example.com
+author: qbantek
+twitter:
+  username: qbantek
+  card: summary
+logo: /assets/icons/icon-512x512.png  
+social:
+  name: Erich N. Quintero
+  links:
+    - https://twitter.com/qbantek
+    - https://www.linkedin.com/in/ErichQuintero
+    - https://github.com/qbantek
+    - https://keybase.io/qbantek
+
+email: contact@quintsys.com
 twitter_username: qbantek
 github_username:  quintsys
 google_analytics: "UA-36207607-1"

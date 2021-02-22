@@ -2,29 +2,17 @@
 layout: default
 ---
 
-<div class="container-fluid h-100 bg-light">
-    <div class="row h-100">
-        <div class="col-12 p-0 h-100">
-            <div class="jumbotron h-100 text-center m-0 d-flex flex-column justify-content-center">
-                {% asset logo_light.svg
-                class='img-fluid mx-auto'
-                alt={{site.title}}
-                style='max-width:20rem' %}
-                <p class="lead text-dark">We design and build custom software
-                    applications.</p>
-                <p class="text-dark mb-0">APIs, databases, web, desktop & mobile
-                    apps.</p>
-                <p class="text-dark pb-5 mx-auto" style="max-width: 30rem;">
-                    Built, tested, deployed and maintained to
-                    meet your specifications and our quality standards.</p>
-                {%- if site.email -%}
-                <p class="lead">
-                    <a class="btn btn-lg btn-outline-dark"
-                       href="mailto:{{ site.email }}"
-                       role="button">Contact Us</a>
-                </p>
-                {%- endif -%}
-            </div>
-        </div>
-    </div>
+<div class="jumbotron h-100 text-center m-0 d-flex flex-column justify-content-center">
+  {% asset logo_light.svg 
+    class='img-fluid mx-auto' 
+    alt={{site.title}} 
+    style='max-width:20rem' %}
+  <p class="lead text-dark">
+    We design and build custom software applications.</p>
+  <p class="text-dark mb-0">
+    APIs, databases, web, desktop &amp; mobile apps.</p>
+  <p class="text-dark pb-5 mx-auto" style="max-width: 30rem;">
+  Built, tested, deployed and maintained to
+  meet your specifications and our quality standards.</p>
 </div>
+
