@@ -72,7 +72,7 @@ button. You will be prompted for a key pair to allow you to connect to this
 instance. You can select an existing one or generate a new one. If this is your
 first time here, your only option is to create one.
 
-Download your newly generated key-pair and store it in a secure place. This are
+Download your newly generated key-pair and store it in a secure place. These are
 the keys to your instance and you won't be able to download this again.
 
 {% asset key-pair.png class='img-fluid mx-auto' alt='Key Pair' %}
