@@ -1,9 +1,24 @@
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  gtag('config', '{{ site.google_analytics }}');
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDTy--KDdR6QeVl6BtE1H7LY9dCS9FkZDU",
+    authDomain: "quintsys-com.firebaseapp.com",
+    databaseURL: "https://quintsys-com.firebaseio.com",
+    projectId: "quintsys-com",
+    storageBucket: "quintsys-com.appspot.com",
+    messagingSenderId: "137146619105",
+    appId: "1:137146619105:web:58a7d2cf59eb8c32e813a0",
+    measurementId: "G-5PHP3QGNBQ"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
 </script>
