@@ -14,9 +14,7 @@
   <meta name="application-name" content="{{ site.title }}">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
-  {%- seo -%}
-  {%- feed_meta -%}
-  {%- if jekyll.environment == 'production' -%}
-  {%- include google-analytics.html -%}
-  {%- endif -%}
+  {% seo %}
+  {% feed_meta %}
+  {% include google-analytics.html %}
 </head>
