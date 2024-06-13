@@ -10,7 +10,7 @@ tags:
   - rails
 ---
 
-This article will cover how to deploy a [docker](https://www.docker.com/) 
+This article covers how to deploy a [docker](https://www.docker.com/) 
 instance of a [Ruby on Rails](https://rubyonrails.org/) application to 
 [AWS](https://aws.amazon.com/). We will setup an [NGINX](https://nginx.org/) 
 server to proxy requests and provide support for HTTPS.
@@ -86,3 +86,6 @@ your instance and your are now looking at the Launch Status page, click on the
 ## Connect to the Instance 
 
 ...wip
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbNzU2MTc0NTAxXX0=
+-->
