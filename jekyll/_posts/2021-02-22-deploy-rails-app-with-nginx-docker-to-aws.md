@@ -12,7 +12,7 @@ tags:
 
 This article covers how to deploy a [docker](https://www.docker.com/) 
 instance of a [Ruby on Rails](https://rubyonrails.org/) application to 
-[AWS](https://aws.amazon.com/). We will setup an [NGINX](https://nginx.org/) 
+[AWS](https://aws.amazon.com/). We are going to set up an [NGINX](https://nginx.org/) 
 server to proxy requests and provide support for HTTPS.
 
 AWS provides a generous free tier service that should cover the costs for all
@@ -22,7 +22,7 @@ be ready in no time.
 ## Setting up an EC2 instance
 
 Go to the [AWS Management Console](https://aws.amazon.com/console/) and sign in
-using your account credentials. Click on the EC2 service.
+using your account credentials. Click on the `EC2` service.
 
 From the EC2 Dashboard, select Instances, then find the `Launch Instances`
 button:
@@ -87,5 +87,5 @@ your instance and your are now looking at the Launch Status page, click on the
 
 ...wip
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzU2MTc0NTAxXX0=
+eyJoaXN0b3J5IjpbLTMwMzAzNzQ0NF19
 -->
